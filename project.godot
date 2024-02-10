@@ -23,5 +23,11 @@ SceneManager="*res://Autoload/SceneManager/SceneManager.tscn"
 
 [display]
 
+window/size/viewport_width=300
+window/size/viewport_height=150
 window/size/mode=2
 window/stretch/mode="canvas_items"
+
+[rendering]
+
+textures/canvas_textures/default_texture_filter=0
