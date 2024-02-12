@@ -1,7 +1,9 @@
 Node
+Camera2D
+Label
+StaticBody2D
 State
 CharacterBody2D
 Area2D
 CollisionShape2D
 Sprite2D
-Camera2D

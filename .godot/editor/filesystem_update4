@@ -9,3 +9,10 @@ res://Scripts/Player/FSM.gd
 res://Scripts/Player/Fall.gd
 res://Scripts/Player/Run.gd
 res://Scripts/Player/Player.gd
+res://Scripts/Player/Idle.gd
+res://Autoload/SceneManager/SceneManager.tscn
+res://Scripts/Player/Rise.gd
+res://Scenes/Rise.gd
+res://Scripts/Player/FallingStart.gd
+res://Scripts/Player/RisingStop.gd
+res://Autoload/Util.gd

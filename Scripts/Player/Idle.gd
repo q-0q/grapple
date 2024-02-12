@@ -4,7 +4,8 @@ func _ready():
 	
 	# State transitions go here, in order of priority
 	transition_list = [
-		
+		$"../Run",
+		$"../Rise",
 	]
 
 func on_enter():
@@ -17,5 +18,5 @@ func on_exit():
 	pass
 	
 func condition():
-	return false
+	return character().is_on_floor()
 

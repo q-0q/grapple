@@ -4,7 +4,9 @@ func _ready():
 	
 	# State transitions go here, in order of priority
 	transition_list = [
-		
+		$".",
+		$"../RisingStop",
+		$"../Fall",
 	]
 
 func on_enter():
@@ -17,5 +19,5 @@ func on_exit():
 	pass
 	
 func condition():
-	return false
+	return Input.is_action_just_pressed("Jump")
 

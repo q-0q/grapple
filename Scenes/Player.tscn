@@ -1,15 +1,25 @@
-[gd_scene load_steps=9 format=3 uid="uid://dq66yl4reqfhp"]
+[gd_scene load_steps=13 format=3 uid="uid://dq66yl4reqfhp"]
 
 [ext_resource type="Script" path="res://Scripts/Player/Player.gd" id="1_5iq4m"]
 [ext_resource type="Texture2D" uid="uid://tavar0p00b0w" path="res://Assets/Player/Player.png" id="1_sfjno"]
 [ext_resource type="Script" path="res://Scripts/Player/FSM.gd" id="2_thr5b"]
 [ext_resource type="Script" path="res://Scripts/Player/Fall.gd" id="3_n72t4"]
 [ext_resource type="Script" path="res://Scripts/Player/Idle.gd" id="4_lku7h"]
+[ext_resource type="Script" path="res://Scripts/Player/FallingStart.gd" id="4_vbqx8"]
 [ext_resource type="Script" path="res://Scripts/Player/Rise.gd" id="5_6lsl8"]
+[ext_resource type="Script" path="res://Scripts/Player/RisingStop.gd" id="6_edo8x"]
 [ext_resource type="Script" path="res://Scripts/Player/Run.gd" id="6_fshyy"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qb60t"]
 size = Vector2(16, 26)
+
+[sub_resource type="Curve" id="Curve_am30v"]
+_data = [Vector2(0, 0.989135), 0.0, -0.11028, 0, 0, Vector2(1, 0), -2.59386, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_2qnwt"]
+_data = [Vector2(0, 0), 0.0, 2.96461, 0, 0, Vector2(0.549261, 0.921965), 0.370551, 0.370551, 0, 0, Vector2(1, 1), 0.00989054, 0.0, 0, 0]
+point_count = 3
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_5iq4m")
@@ -21,17 +31,44 @@ shape = SubResource("RectangleShape2D_qb60t")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_sfjno")
 
+[node name="Label" type="Label" parent="."]
+offset_left = -19.0
+offset_top = -38.0
+offset_right = 21.0
+offset_bottom = -15.0
+
 [node name="FSM" type="Node" parent="."]
 script = ExtResource("2_thr5b")
+debug = true
 
-[node name="Fall" type="Node" parent="FSM"]
-script = ExtResource("3_n72t4")
+[node name="FallingStart" type="Node" parent="FSM"]
+script = ExtResource("4_vbqx8")
+min_height = -20.0
+time_to_min_height = 0.2
+curve = SubResource("Curve_am30v")
 
 [node name="Idle" type="Node" parent="FSM"]
 script = ExtResource("4_lku7h")
 
-[node name="Rise" type="Node" parent="FSM"]
-script = ExtResource("5_6lsl8")
+[node name="RisingStop" type="Node" parent="FSM"]
+script = ExtResource("6_edo8x")
+max_height = 90.0
+time_to_max_height = 0.5
+curve = SubResource("Curve_2qnwt")
+input_release_tightness = 0.5
 
 [node name="Run" type="Node" parent="FSM"]
 script = ExtResource("6_fshyy")
+speed = 300.0
+
+[node name="Rise" type="Node" parent="FSM"]
+script = ExtResource("5_6lsl8")
+
+[node name="Fall" type="Node" parent="FSM"]
+script = ExtResource("3_n72t4")
+fall_speed = 220.0
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(0, -24)
+drag_horizontal_enabled = true
+drag_vertical_enabled = true

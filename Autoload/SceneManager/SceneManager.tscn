@@ -73,3 +73,4 @@ script = ExtResource("1_kpb7f")
 libraries = {
 "": SubResource("AnimationLibrary_mfpkk")
 }
+speed_scale = 5.0
