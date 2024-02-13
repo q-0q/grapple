@@ -24,10 +24,10 @@ Util="*res://Autoload/Util.gd"
 
 [display]
 
-window/size/viewport_width=300
-window/size/viewport_height=150
+window/size/viewport_width=400
+window/size/viewport_height=200
 window/size/mode=2
-window/stretch/mode="canvas_items"
+window/stretch/mode="viewport"
 
 [input]
 

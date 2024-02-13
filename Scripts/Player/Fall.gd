@@ -1,18 +1,24 @@
 extends State
 
-@export var fall_speed : float = 150
+
+var init_y_vel : float
+@export var horizontal_speed : float = 100
+
 func _ready():
-	
+	should_update_flip_h = true
 	# State transitions go here, in order of priority
 	transition_list = [
 		$"../Idle",
 	]
 
 func on_enter():
-	pass
+	init_y_vel = character().velocity.y
 	
 func on_process():
-	desired_position = character().position + Vector2(0, get_process_delta_time() * fall_speed)
+	character().velocity.y = init_y_vel
+	
+	character().velocity.x = \
+		character().compute_air_x_vel(horizontal_speed)
 	
 func on_exit():
 	pass

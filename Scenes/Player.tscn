@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://dq66yl4reqfhp"]
+[gd_scene load_steps=23 format=3 uid="uid://dq66yl4reqfhp"]
 
 [ext_resource type="Script" path="res://Scripts/Player/Player.gd" id="1_5iq4m"]
 [ext_resource type="Texture2D" uid="uid://tavar0p00b0w" path="res://Assets/Player/Player.png" id="1_sfjno"]
@@ -13,13 +13,191 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qb60t"]
 size = Vector2(16, 26)
 
+[sub_resource type="Curve" id="Curve_insii"]
+_data = [Vector2(0, 1), 0.0, -0.16057, 0, 1, Vector2(1, 0.83943), -0.16057, 0.0, 1, 0]
+point_count = 2
+
 [sub_resource type="Curve" id="Curve_am30v"]
-_data = [Vector2(0, 0.989135), 0.0, -0.11028, 0, 0, Vector2(1, 0), -2.59386, 0.0, 0, 0]
+_data = [Vector2(0, 0), 0.0, 2.17732, 0, 0, Vector2(0.985222, 1), 0.483419, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="Curve" id="Curve_2qnwt"]
-_data = [Vector2(0, 0), 0.0, 2.96461, 0, 0, Vector2(0.549261, 0.921965), 0.370551, 0.370551, 0, 0, Vector2(1, 1), 0.00989054, 0.0, 0, 0]
-point_count = 3
+_data = [Vector2(0, 0.994568), 0.0, -1.97481, 0, 0, Vector2(1, 0), -0.621793, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Animation" id="Animation_ak76u"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_4wx40"]
+resource_name = "fall1"
+length = 0.1
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [6]
+}
+
+[sub_resource type="Animation" id="Animation_u6xtv"]
+resource_name = "fall2"
+length = 0.1
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [7]
+}
+
+[sub_resource type="Animation" id="Animation_cowgm"]
+resource_name = "grind1"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [8, 9, 10]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimationPlayer")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.6),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [0.2, false, false],
+"method": &"seek"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_t2hau"]
+resource_name = "grind2"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [11, 12]
+}
+
+[sub_resource type="Animation" id="Animation_t1eog"]
+resource_name = "idle"
+length = 1.9
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 1.2, 1.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimationPlayer")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1.8),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [0.2, false, false],
+"method": &"seek"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_6dej2"]
+resource_name = "rise1"
+length = 0.1
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
+}
+
+[sub_resource type="Animation" id="Animation_g2ls7"]
+resource_name = "rise2"
+length = 0.1
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [5]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hy220"]
+_data = {
+"RESET": SubResource("Animation_ak76u"),
+"fall1": SubResource("Animation_4wx40"),
+"fall2": SubResource("Animation_u6xtv"),
+"grind1": SubResource("Animation_cowgm"),
+"grind2": SubResource("Animation_t2hau"),
+"idle": SubResource("Animation_t1eog"),
+"rise1": SubResource("Animation_6dej2"),
+"rise2": SubResource("Animation_g2ls7")
+}
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_5iq4m")
@@ -30,6 +208,47 @@ shape = SubResource("RectangleShape2D_qb60t")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_sfjno")
+hframes = 13
+
+[node name="ParticlesLeft" type="CPUParticles2D" parent="Sprite2D"]
+z_index = 1
+position = Vector2(-9, 15)
+emitting = false
+amount = 1
+lifetime = 0.1
+randomness = 0.39
+lifetime_randomness = 0.74
+emission_shape = 1
+emission_sphere_radius = 2.0
+direction = Vector2(1, -1)
+spread = 48.64
+gravity = Vector2(2.08165e-12, 2.08165e-12)
+initial_velocity_min = 30.0
+initial_velocity_max = 30.0
+scale_amount_min = 3.0
+scale_amount_max = 3.0
+scale_amount_curve = SubResource("Curve_insii")
+color = Color(0.976471, 0.94902, 0.372549, 1)
+
+[node name="ParticlesRight" type="CPUParticles2D" parent="Sprite2D"]
+z_index = 1
+position = Vector2(2, 15)
+emitting = false
+amount = 1
+lifetime = 0.1
+randomness = 0.39
+lifetime_randomness = 0.74
+emission_shape = 1
+emission_sphere_radius = 2.0
+direction = Vector2(1, -1)
+spread = 48.64
+gravity = Vector2(2.08165e-12, 2.08165e-12)
+initial_velocity_min = 30.0
+initial_velocity_max = 30.0
+scale_amount_min = 3.0
+scale_amount_max = 3.0
+scale_amount_curve = SubResource("Curve_insii")
+color = Color(0.976471, 0.94902, 0.372549, 1)
 
 [node name="Label" type="Label" parent="."]
 offset_left = -19.0
@@ -39,12 +258,11 @@ offset_bottom = -15.0
 
 [node name="FSM" type="Node" parent="."]
 script = ExtResource("2_thr5b")
-debug = true
 
 [node name="FallingStart" type="Node" parent="FSM"]
 script = ExtResource("4_vbqx8")
-min_height = -20.0
-time_to_min_height = 0.2
+min_velocity = -400.0
+time_to_min_velocity = 0.5
 curve = SubResource("Curve_am30v")
 
 [node name="Idle" type="Node" parent="FSM"]
@@ -52,23 +270,36 @@ script = ExtResource("4_lku7h")
 
 [node name="RisingStop" type="Node" parent="FSM"]
 script = ExtResource("6_edo8x")
-max_height = 90.0
-time_to_max_height = 0.5
+max_velocity = 400.0
+time_to_max_velocity = 0.35
 curve = SubResource("Curve_2qnwt")
-input_release_tightness = 0.5
+input_release_tightness = 0.45
+horizontal_speed = 200.0
 
 [node name="Run" type="Node" parent="FSM"]
 script = ExtResource("6_fshyy")
-speed = 300.0
+base_speed = 170.0
+time_until_super = 0.7
+super_speed_multiplier = 1.5
 
 [node name="Rise" type="Node" parent="FSM"]
 script = ExtResource("5_6lsl8")
+horizontal_speed = 200.0
 
 [node name="Fall" type="Node" parent="FSM"]
 script = ExtResource("3_n72t4")
-fall_speed = 220.0
+horizontal_speed = 200.0
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(0, -24)
+position = Vector2(2.08165e-12, 2.08165e-12)
 drag_horizontal_enabled = true
 drag_vertical_enabled = true
+drag_left_margin = 0.1
+drag_top_margin = 0.1
+drag_right_margin = 0.1
+drag_bottom_margin = 0.1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_hy220")
+}

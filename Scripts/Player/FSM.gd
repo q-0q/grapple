@@ -4,7 +4,7 @@ extends Node
 
 # bookkeeping
 var current_state : State
-@onready var default_state : State = $Fall
+@onready var default_state : State = $Idle
 
 var desired_position : Vector2
 var desired_rotation_deg : float
@@ -35,10 +35,6 @@ func update():
 
 	else:
 		current_state.meta_on_process()
-
-	desired_position = current_state.desired_position
-	desired_rotation_deg = current_state.desired_rotation_deg
-	desired_animation = current_state.desired_animation
 	
 	if debug:
 		$"../Label".text = current_state.name

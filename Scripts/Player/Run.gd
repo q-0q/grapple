@@ -1,31 +1,48 @@
 extends State
 
-@export var speed : float = 20
+@export var base_speed : float = 20
+@export var time_until_super : float = 0.5
+@export var super_speed_multiplier : float = 2
+
+var speed : float
 
 func _ready():
+	
+	should_update_flip_h = true
 	
 	# State transitions go here, in order of priority
 	transition_list = [
 		$"../Rise",
 		$".",
 		$"../Idle",
-		$"../Fall",
+		$"../FallingStart",
 	]
 
 func on_enter():
-	pass
+	speed = base_speed
+	character().get_node("AnimationPlayer").play("grind1")
+	
 	
 func on_process():
 	
 	if Input.is_action_pressed("Left"):
-		desired_position.x -= speed * get_process_delta_time()
-		set_flip_h.emit(true)
-	if Input.is_action_pressed("Right"):
-		desired_position.x += speed * get_process_delta_time()
-		set_flip_h.emit(false)
+		character().velocity.x = character().compute_ground_x_vel(-speed)
+	elif Input.is_action_pressed("Right"):
+		character().velocity.x = character().compute_ground_x_vel(speed)
+		
+	if time_in_current_state > 0.3:
+		for particles in character().get_node("Sprite2D").get_children():
+			particles.emitting = true
 	
+	if speed == base_speed and time_in_current_state > time_until_super:
+		speed = base_speed * super_speed_multiplier
+		character().get_node("AnimationPlayer").play("grind2")
+		
+	
+		
 func on_exit():
-	pass
+	for particles in character().get_node("Sprite2D").get_children():
+		particles.emitting = false
 	
 func condition():
 	# Left or Right but not both

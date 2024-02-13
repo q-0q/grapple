@@ -4,12 +4,9 @@ class_name State
 
 var transition_list : Array[State]
 
-var desired_position: Vector2
-var desired_rotation_deg: float = 0
-var desired_animation: String = ""
-
 var time_in_current_state : float = 0
 var is_locked : bool = false
+var should_update_flip_h : bool = false
 
 func _process(delta):
 	time_in_current_state += delta
@@ -17,19 +14,19 @@ func _process(delta):
 ### Monitor State metadata around user on_enter() and on_process()
 
 func meta_on_enter() -> void:
-	desired_position = character().position
-	desired_rotation_deg = character().rotation_degrees
-
 	on_enter()
 
 func meta_on_process() -> void:
-	desired_position = character().position
-	desired_rotation_deg = character().rotation_degrees
-
+	
+	if should_update_flip_h:
+		if Input.is_action_pressed("Left"):
+			set_flip_h.emit(true)
+		elif Input.is_action_pressed("Right"):
+			set_flip_h.emit(false)
+		
 	on_process()
 	
 func meta_on_exit() -> void:
-	 # empty for now...
 	on_exit()
 
 func reset_time_in_current_state() -> void:

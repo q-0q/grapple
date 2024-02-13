@@ -10,10 +10,13 @@ position = Vector2(18, -32)
 
 [node name="Block" parent="." instance=ExtResource("2_fxnpu")]
 position = Vector2(1, 61)
-scale = Vector2(14.54, 3.38)
+scale = Vector2(70.58, 3.38)
 
 [node name="Block2" parent="." instance=ExtResource("2_fxnpu")]
 position = Vector2(-66, -33)
+
+[node name="Block4" parent="." instance=ExtResource("2_fxnpu")]
+position = Vector2(-25, -10)
 
 [node name="Block3" parent="." instance=ExtResource("2_fxnpu")]
 position = Vector2(73, -56)

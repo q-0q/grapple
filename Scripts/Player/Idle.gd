@@ -6,13 +6,14 @@ func _ready():
 	transition_list = [
 		$"../Run",
 		$"../Rise",
+		$"../FallingStart",
 	]
 
 func on_enter():
-	pass
+		character().get_node("AnimationPlayer").play("idle")
 	
 func on_process():
-	pass
+	character().velocity.x = character().compute_ground_x_vel(0)
 	
 func on_exit():
 	pass
