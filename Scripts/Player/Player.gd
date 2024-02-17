@@ -32,7 +32,7 @@ func compute_air_x_vel(speed) -> float:
 	
 func compute_ground_x_vel(goal) -> float:
 	if goal == 0:
-		return compute_x_velocity(ground_friction / 3, goal)
+		return compute_x_velocity(ground_friction / 5, goal)
 		
 	return compute_x_velocity(ground_friction, goal)
 	

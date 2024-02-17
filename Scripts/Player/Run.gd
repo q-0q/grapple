@@ -12,15 +12,25 @@ func _ready():
 	
 	# State transitions go here, in order of priority
 	transition_list = [
+		$"../RisingStop",
 		$"../Rise",
+		$"../Skid",
 		$".",
 		$"../Idle",
 		$"../FallingStart",
 	]
+	
+	flags = [
+		"ground"
+	]
 
 func on_enter():
 	speed = base_speed
-	character().get_node("AnimationPlayer").play("grind1")
+	
+	if $"..".previous_state.has_flag("air"):
+		character().get_node("AnimationPlayer").play("grind1_fromair")
+	else:
+		character().get_node("AnimationPlayer").play("grind1_fromground")
 	
 	
 func on_process():
@@ -30,9 +40,9 @@ func on_process():
 	elif Input.is_action_pressed("Right"):
 		character().velocity.x = character().compute_ground_x_vel(speed)
 		
-	if time_in_current_state > 0.3:
-		for particles in character().get_node("Sprite2D").get_children():
-			particles.emitting = true
+	#if time_in_current_state > time_until_super:
+		#for particles in character().get_node("Sprite2D").get_children():
+			#particles.emitting = true
 	
 	if speed == base_speed and time_in_current_state > time_until_super:
 		speed = base_speed * super_speed_multiplier
@@ -41,6 +51,7 @@ func on_process():
 	
 		
 func on_exit():
+	return
 	for particles in character().get_node("Sprite2D").get_children():
 		particles.emitting = false
 	

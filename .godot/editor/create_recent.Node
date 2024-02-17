@@ -1,6 +1,10 @@
-CPUParticles2D
+Node2D
 AnimationPlayer
+Sprite2D
+Line2D
 Node
+SkeletonIK3D
+CPUParticles2D
 Camera2D
 Label
 StaticBody2D
@@ -8,4 +12,3 @@ State
 CharacterBody2D
 Area2D
 CollisionShape2D
-Sprite2D

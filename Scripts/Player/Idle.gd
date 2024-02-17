@@ -4,9 +4,14 @@ func _ready():
 	
 	# State transitions go here, in order of priority
 	transition_list = [
+		$"../RisingStop",
 		$"../Run",
 		$"../Rise",
 		$"../FallingStart",
+	]
+	
+	flags = [
+		"ground"
 	]
 
 func on_enter():

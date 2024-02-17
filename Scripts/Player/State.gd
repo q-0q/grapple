@@ -1,12 +1,15 @@
-extends Node
+extends Node2D
 
 class_name State
 
 var transition_list : Array[State]
+var flags : Array[String]
 
 var time_in_current_state : float = 0
 var is_locked : bool = false
 var should_update_flip_h : bool = false
+
+var frames_in_state : int = 0
 
 func _process(delta):
 	time_in_current_state += delta
@@ -14,9 +17,12 @@ func _process(delta):
 ### Monitor State metadata around user on_enter() and on_process()
 
 func meta_on_enter() -> void:
+	frames_in_state = 1
 	on_enter()
 
 func meta_on_process() -> void:
+	
+	frames_in_state += 1
 	
 	if should_update_flip_h:
 		if Input.is_action_pressed("Left"):
@@ -31,6 +37,7 @@ func meta_on_exit() -> void:
 
 func reset_time_in_current_state() -> void:
 	time_in_current_state = 0
+	
 
 ###
 		
@@ -40,7 +47,6 @@ func get_transition_state() -> State:
 		get_tree().quit(1)
 	
 	if is_locked:
-		print(name + " locked")
 		return self
 	
 	for state in transition_list:
@@ -67,6 +73,9 @@ func lock_state_for_duration(duration) -> void:
 
 func _on_lock_state_timeout() -> void:
 	is_locked = false
+	
+func has_flag(flag):
+	return flag in flags
 		
 ### Virtual functions ##############
 

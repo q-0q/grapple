@@ -2,6 +2,10 @@ extends State
 
 func _ready():
 	
+	flags = [
+		
+	]
+	
 	# State transitions go here, in order of priority
 	transition_list = [
 		

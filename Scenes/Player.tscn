@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://dq66yl4reqfhp"]
+[gd_scene load_steps=34 format=3 uid="uid://dq66yl4reqfhp"]
 
 [ext_resource type="Script" path="res://Scripts/Player/Player.gd" id="1_5iq4m"]
 [ext_resource type="Texture2D" uid="uid://tavar0p00b0w" path="res://Assets/Player/Player.png" id="1_sfjno"]
@@ -9,6 +9,10 @@
 [ext_resource type="Script" path="res://Scripts/Player/Rise.gd" id="5_6lsl8"]
 [ext_resource type="Script" path="res://Scripts/Player/RisingStop.gd" id="6_edo8x"]
 [ext_resource type="Script" path="res://Scripts/Player/Run.gd" id="6_fshyy"]
+[ext_resource type="Script" path="res://Scripts/Player/Skid.gd" id="10_2isum"]
+[ext_resource type="Script" path="res://Scripts/Player/AirGrappleHold.gd" id="11_mun20"]
+[ext_resource type="Script" path="res://Scripts/Player/AirGrappleFire.gd" id="12_wio8j"]
+[ext_resource type="Texture2D" uid="uid://mb7ympx2alrb" path="res://Assets/Player/Grapple.png" id="13_stlk4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qb60t"]
 size = Vector2(16, 26)
@@ -25,6 +29,91 @@ point_count = 2
 _data = [Vector2(0, 0.994568), 0.0, -1.97481, 0, 0, Vector2(1, 0), -0.621793, 0.0, 0, 0]
 point_count = 2
 
+[sub_resource type="Animation" id="Animation_efons"]
+resource_name = "fire"
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("holder/Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.35, 0.65, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 7]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("holder/Sprite2D/ExtensionPoint:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1.07177, 1, 1),
+"update": 1,
+"values": [Vector2(-0.5, 38), Vector2(-0.5, -11), Vector2(-0.5, -40)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Line2D:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.2),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_unlgx"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("holder/Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("holder/Sprite2D/ExtensionPoint:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -11)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Line2D:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_batll"]
+_data = {
+"RESET": SubResource("Animation_unlgx"),
+"fire": SubResource("Animation_efons")
+}
+
 [sub_resource type="Animation" id="Animation_ak76u"]
 length = 0.001
 tracks/0/type = "value"
@@ -38,6 +127,63 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D/GrappleFiringPoint:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_qgnf8"]
+resource_name = "air_grapple_fire"
+length = 0.2
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [19, 20]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D/GrappleFiringPoint:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.15),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(12, -8), Vector2(10, -9)]
+}
+
+[sub_resource type="Animation" id="Animation_n120d"]
+resource_name = "air_grapple_hold"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [15, 16, 17, 18]
 }
 
 [sub_resource type="Animation" id="Animation_4wx40"]
@@ -74,8 +220,39 @@ tracks/0/keys = {
 "values": [7]
 }
 
+[sub_resource type="Animation" id="Animation_1mlac"]
+resource_name = "grind1_fromair"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.3, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 8, 9, 10]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimationPlayer")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.7),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [0.3, false, false],
+"method": &"seek"
+}]
+}
+
 [sub_resource type="Animation" id="Animation_cowgm"]
-resource_name = "grind1"
+resource_name = "grind1_fromground"
 length = 0.8
 loop_mode = 1
 tracks/0/type = "value"
@@ -187,30 +364,53 @@ tracks/0/keys = {
 "values": [5]
 }
 
+[sub_resource type="Animation" id="Animation_mbjml"]
+resource_name = "skid"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [13, 14]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_hy220"]
 _data = {
 "RESET": SubResource("Animation_ak76u"),
+"air_grapple_fire": SubResource("Animation_qgnf8"),
+"air_grapple_hold": SubResource("Animation_n120d"),
 "fall1": SubResource("Animation_4wx40"),
 "fall2": SubResource("Animation_u6xtv"),
-"grind1": SubResource("Animation_cowgm"),
+"grind1_fromair": SubResource("Animation_1mlac"),
+"grind1_fromground": SubResource("Animation_cowgm"),
 "grind2": SubResource("Animation_t2hau"),
 "idle": SubResource("Animation_t1eog"),
 "rise1": SubResource("Animation_6dej2"),
-"rise2": SubResource("Animation_g2ls7")
+"rise2": SubResource("Animation_g2ls7"),
+"skid": SubResource("Animation_mbjml")
 }
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_5iq4m")
+air_friction = 3.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-1, 3)
 shape = SubResource("RectangleShape2D_qb60t")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(2.08165e-12, 2.08165e-12)
 texture = ExtResource("1_sfjno")
-hframes = 13
+hframes = 21
 
 [node name="ParticlesLeft" type="CPUParticles2D" parent="Sprite2D"]
+visible = false
 z_index = 1
 position = Vector2(-9, 15)
 emitting = false
@@ -231,6 +431,7 @@ scale_amount_curve = SubResource("Curve_insii")
 color = Color(0.976471, 0.94902, 0.372549, 1)
 
 [node name="ParticlesRight" type="CPUParticles2D" parent="Sprite2D"]
+visible = false
 z_index = 1
 position = Vector2(2, 15)
 emitting = false
@@ -250,6 +451,8 @@ scale_amount_max = 3.0
 scale_amount_curve = SubResource("Curve_insii")
 color = Color(0.976471, 0.94902, 0.372549, 1)
 
+[node name="GrappleFiringPoint" type="Node2D" parent="Sprite2D"]
+
 [node name="Label" type="Label" parent="."]
 offset_left = -19.0
 offset_top = -38.0
@@ -259,16 +462,16 @@ offset_bottom = -15.0
 [node name="FSM" type="Node" parent="."]
 script = ExtResource("2_thr5b")
 
-[node name="FallingStart" type="Node" parent="FSM"]
+[node name="FallingStart" type="Node2D" parent="FSM"]
 script = ExtResource("4_vbqx8")
 min_velocity = -400.0
 time_to_min_velocity = 0.5
 curve = SubResource("Curve_am30v")
 
-[node name="Idle" type="Node" parent="FSM"]
+[node name="Idle" type="Node2D" parent="FSM"]
 script = ExtResource("4_lku7h")
 
-[node name="RisingStop" type="Node" parent="FSM"]
+[node name="RisingStop" type="Node2D" parent="FSM"]
 script = ExtResource("6_edo8x")
 max_velocity = 400.0
 time_to_max_velocity = 0.35
@@ -276,19 +479,48 @@ curve = SubResource("Curve_2qnwt")
 input_release_tightness = 0.45
 horizontal_speed = 200.0
 
-[node name="Run" type="Node" parent="FSM"]
+[node name="Run" type="Node2D" parent="FSM"]
 script = ExtResource("6_fshyy")
 base_speed = 170.0
-time_until_super = 0.7
+time_until_super = 0.8
 super_speed_multiplier = 1.5
 
-[node name="Rise" type="Node" parent="FSM"]
+[node name="Rise" type="Node2D" parent="FSM"]
 script = ExtResource("5_6lsl8")
 horizontal_speed = 200.0
 
-[node name="Fall" type="Node" parent="FSM"]
+[node name="Fall" type="Node2D" parent="FSM"]
 script = ExtResource("3_n72t4")
 horizontal_speed = 200.0
+
+[node name="Skid" type="Node2D" parent="FSM"]
+script = ExtResource("10_2isum")
+
+[node name="AirGrappleHold" type="Node2D" parent="FSM"]
+script = ExtResource("11_mun20")
+
+[node name="AirGrappleFire" type="Node2D" parent="FSM"]
+script = ExtResource("12_wio8j")
+
+[node name="Line2D" type="Line2D" parent="FSM/AirGrappleFire"]
+visible = false
+width = 1.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="FSM/AirGrappleFire"]
+libraries = {
+"": SubResource("AnimationLibrary_batll")
+}
+
+[node name="holder" type="Node2D" parent="FSM/AirGrappleFire"]
+position = Vector2(11, -9)
+
+[node name="Sprite2D" type="Sprite2D" parent="FSM/AirGrappleFire/holder"]
+position = Vector2(0, -40)
+texture = ExtResource("13_stlk4")
+hframes = 8
+
+[node name="ExtensionPoint" type="Node2D" parent="FSM/AirGrappleFire/holder/Sprite2D"]
+position = Vector2(0, -11)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(2.08165e-12, 2.08165e-12)

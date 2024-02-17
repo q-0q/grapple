@@ -10,9 +10,17 @@ func _ready():
 		$"../RisingStop",
 		$"../FallingStart",
 	]
+	
+	flags = [
+		"air"
+	]
 
 func on_enter():
+	#TODO: this will maybe change.	
 	character().get_node("AnimationPlayer").play("rise1")
+	
+	character().velocity.y = -$"../RisingStop".max_velocity
+	
 	
 func on_process():
 	character().velocity.x = \
@@ -22,5 +30,5 @@ func on_exit():
 	pass
 	
 func condition():
-	return Input.is_action_just_pressed("Jump")
+	return false
 

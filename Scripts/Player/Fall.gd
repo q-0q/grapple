@@ -8,7 +8,13 @@ func _ready():
 	should_update_flip_h = true
 	# State transitions go here, in order of priority
 	transition_list = [
+		$"../Run",
 		$"../Idle",
+		$"../AirGrappleHold"
+	]
+	
+	flags = [
+		"air"
 	]
 
 func on_enter():
