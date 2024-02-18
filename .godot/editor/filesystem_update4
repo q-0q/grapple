@@ -1,6 +1,3 @@
+res://Scenes/Game.tscn
 res://Scenes/Player.tscn
 res://Scripts/Player/AirGrappleFire.gd
-res://Scenes/Game.tscn
-res://Scripts/Player/State.gd
-res://Scripts/Player/Run.gd
-res://Scripts/Player/AirGrappleHold.gd
