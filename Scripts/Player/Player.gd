@@ -11,7 +11,6 @@ func _process(delta):
 	# Update FSM
 	$FSM.update()
 	
-	# TODO: $AnimationPlayer.play($FSM.desired_animation)
 	move_and_slide()
 
 

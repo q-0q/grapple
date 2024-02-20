@@ -24,10 +24,20 @@ position = Vector2(73, -56)
 scale = Vector2(4, 1)
 
 [node name="Block5" parent="." instance=ExtResource("2_fxnpu")]
-position = Vector2(-53, -125)
+position = Vector2(-61, -118)
 rotation = 0.3735
 scale = Vector2(3, 1)
 
 [node name="Block6" parent="." instance=ExtResource("2_fxnpu")]
 position = Vector2(87, -175)
+scale = Vector2(4, 1)
+
+[node name="Block7" parent="." instance=ExtResource("2_fxnpu")]
+position = Vector2(216, -136)
+rotation = 0.689999
+scale = Vector2(4, 1)
+
+[node name="Block8" parent="." instance=ExtResource("2_fxnpu")]
+position = Vector2(-44, -243)
+rotation = -0.606512
 scale = Vector2(4, 1)

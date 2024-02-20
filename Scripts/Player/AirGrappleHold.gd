@@ -22,6 +22,9 @@ func on_enter():
 	enter_vel = character().velocity
 	character().get_node("AnimationPlayer").play("air_grapple_hold")
 	
+	if character().velocity.length() > 200:
+		character().velocity = character().velocity.normalized() * 200
+	
 	
 func on_process():
 	if (get_global_mouse_position() - character().position).x > 0:

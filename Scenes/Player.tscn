@@ -453,6 +453,9 @@ color = Color(0.976471, 0.94902, 0.372549, 1)
 
 [node name="GrappleFiringPoint" type="Node2D" parent="Sprite2D"]
 
+[node name="RayCast2D" type="RayCast2D" parent="Sprite2D/GrappleFiringPoint"]
+target_position = Vector2(2.08165e-12, 2.08165e-12)
+
 [node name="Label" type="Label" parent="."]
 offset_left = -19.0
 offset_top = -38.0
