@@ -6,38 +6,32 @@
 [node name="Game" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource("1_2jbx6")]
-position = Vector2(18, -32)
+position = Vector2(-148, -247)
+rotation = -0.00199038
+floor_max_angle = 1.0472
+floor_snap_length = 10.0
 
 [node name="Block" parent="." instance=ExtResource("2_fxnpu")]
 position = Vector2(1, 61)
+rotation = 0.0023125
 scale = Vector2(70.58, 3.38)
 
-[node name="Block2" parent="." instance=ExtResource("2_fxnpu")]
-position = Vector2(-79, -71)
-
-[node name="Block4" parent="." instance=ExtResource("2_fxnpu")]
-position = Vector2(-25, -10)
-scale = Vector2(3, 1)
-
-[node name="Block3" parent="." instance=ExtResource("2_fxnpu")]
-position = Vector2(73, -56)
-scale = Vector2(4, 1)
-
 [node name="Block5" parent="." instance=ExtResource("2_fxnpu")]
-position = Vector2(-61, -118)
-rotation = 0.3735
-scale = Vector2(3, 1)
+position = Vector2(-388, -246)
+rotation = -0.429351
+scale = Vector2(13.36, 8.56996)
 
 [node name="Block6" parent="." instance=ExtResource("2_fxnpu")]
-position = Vector2(87, -175)
-scale = Vector2(4, 1)
+position = Vector2(328, -37)
+rotation = 0.408407
+scale = Vector2(10.62, 14.41)
 
 [node name="Block7" parent="." instance=ExtResource("2_fxnpu")]
-position = Vector2(216, -136)
-rotation = 0.689999
-scale = Vector2(4, 1)
+position = Vector2(87, -373)
+rotation = -0.429351
+scale = Vector2(10.98, 8.57)
 
 [node name="Block8" parent="." instance=ExtResource("2_fxnpu")]
-position = Vector2(-44, -243)
-rotation = -0.606512
-scale = Vector2(4, 1)
+position = Vector2(-83, 39)
+rotation = -0.429351
+scale = Vector2(8.77, 14.33)

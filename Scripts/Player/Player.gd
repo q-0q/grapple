@@ -3,6 +3,10 @@ extends CharacterBody2D
 @export var ground_friction : float = 20
 @export var air_friction : float = 20
 
+
+func _ready():
+	NoiseManager.cam = $Camera2D
+	
 func _process(delta):
 	
 	# Apply state from FSM
@@ -12,6 +16,11 @@ func _process(delta):
 	$FSM.update()
 	
 	move_and_slide()
+	
+	if Input.is_key_pressed(KEY_L):
+		Engine.time_scale = 0.05
+	else:
+		Engine.time_scale = 1
 
 
 func compute_x_velocity(friction : float, goal: float) -> float:

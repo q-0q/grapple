@@ -1,6 +1,7 @@
 extends State
 
-@export var max_tether_distance : float = 50
+@export var grapple_distance : float = 250
+@export var noise_curve : Curve
 @onready var line : Line2D = $Line2D
 @onready var FiringPoint : Node2D = $"../../Sprite2D/GrappleFiringPoint"
 @onready var ExtensionPoint : Node2D = $holder/Sprite2D/ExtensionPoint
@@ -23,6 +24,8 @@ func _ready():
 	]
 
 func on_enter():
+	
+		NoiseManager.do_shake(100, 30, noise_curve, 0.1)
 		is_attached = compute_attach_point()
 		
 		character().get_node("AnimationPlayer").play("air_grapple_fire")
@@ -58,17 +61,26 @@ func compute_holder_rotation_deg() -> float:
 
 func compute_attach_point() -> bool:
 	var cast : RayCast2D = FiringPoint.get_node("RayCast2D")
-	cast.target_position = (FiringPoint.get_local_mouse_position()).normalized() * 150
+	cast.target_position = (FiringPoint.get_local_mouse_position()).normalized() * grapple_distance
 	cast.force_raycast_update()
 	if cast.is_colliding():
 		attach_point = cast.get_collision_point()
+		
+		var rot = -cast.get_collision_normal().angle_to(Vector2.UP)
+		
+		if abs(rot) <= PI * 0.5:
+			pass
+			# print(rot)
+			#character().rotation = rot
 		return true
 	else:
-		attach_point = ((get_global_mouse_position() - character().position).normalized() * 150) + character().position
+		attach_point = ((get_global_mouse_position() - character().position).normalized() * grapple_distance) + character().position
 		return false
 	
 func _on_timeout():
 	if !is_attached: return
-	var v = (attach_point - character().position).normalized() * 1000
+	#NoiseManager.do_shake(120, 50, noise_curve, 0.2)
+	var v = (attach_point - character().position).normalized() * 2000
+	if v.y > 0: v.y += 20
 	character().velocity.y += v.y * 4
 	character().velocity.x += v.x / 2

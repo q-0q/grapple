@@ -26,6 +26,7 @@ func _ready():
 
 func on_enter():
 	speed = base_speed
+	character().rotation = -character().get_floor_normal().angle_to(Vector2.UP)
 	
 	if $"..".previous_state.has_flag("air"):
 		character().get_node("AnimationPlayer").play("grind1_fromair")
@@ -35,6 +36,9 @@ func on_enter():
 	
 func on_process():
 	
+	character().rotation = -character().get_floor_normal().angle_to(Vector2.UP)
+	
+	var base_vel : Vector2 = Vector2.ZERO
 	if Input.is_action_pressed("Left"):
 		character().velocity.x = character().compute_ground_x_vel(-speed)
 	elif Input.is_action_pressed("Right"):

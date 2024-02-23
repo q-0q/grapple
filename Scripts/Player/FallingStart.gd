@@ -27,7 +27,7 @@ func on_enter():
 	init_y = character().position.y
 	character().get_node("AnimationPlayer").play("fall1")
 	if $"..".previous_state.has_flag("ground"):
-		transition_list.append($"../Rise")
+		transition_list.append($"../RisingStop")
 	
 	
 func on_process():
@@ -43,14 +43,14 @@ func on_process():
 		character().compute_air_x_vel(horizontal_speed)
 		
 	if time_in_current_state >= coyote_time:
-		transition_list.erase($"../Rise")
+		transition_list.erase($"../RisingStop")
 	
 	if time_in_current_state >= time_to_min_velocity:
 		transition_list.append($"../Fall")
 	
 func on_exit():
 	transition_list.erase($"../Fall")
-	transition_list.erase($"../Rise")
+	transition_list.erase($"../RisingStop")
 	
 func condition():
 	return !character().is_on_floor() and \

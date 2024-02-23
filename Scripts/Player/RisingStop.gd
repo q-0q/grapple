@@ -6,7 +6,6 @@ extends State
 @export var input_release_tightness : float
 @export var horizontal_speed : float = 100
 
-
 var input_released : bool = false
 var input_release_time_offset : float = 100
 
@@ -22,6 +21,8 @@ func _ready():
 	transition_list = [
 		$"../FallingStart",
 		$"../AirGrappleHold",
+		$"../Idle",
+		$"../Run",
 	]
 	
 	flags = [
@@ -29,8 +30,6 @@ func _ready():
 	]
 
 func on_enter():
-	
-	
 		
 	input_released = false
 	input_release_time_offset = 0
@@ -52,7 +51,9 @@ func on_enter():
 		
 func on_process():
 
-	
+	if character().is_on_ceiling():
+		print("BONK!")
+
 	if Input.is_action_just_released("Jump") and !input_released:
 		input_released = true
 		input_release_time_offset = input_release_tightness
@@ -63,13 +64,9 @@ func on_process():
 	character().velocity.x = \
 		character().compute_air_x_vel(horizontal_speed)
 	
-	
-	
-func on_exit():
-	pass
-	
 func condition():
-	return character().velocity.y < 0 or Input.is_action_just_pressed("Jump")
+	return character().velocity.y < 0 \
+		or Input.is_action_just_pressed("Jump")
 
 func get_y_velocity_from_time(time) -> float:
 	var weight = curve.sample_baked(time / time_to_max_velocity)
