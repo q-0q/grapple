@@ -17,6 +17,7 @@ func _process(delta):
 	
 	move_and_slide()
 	
+	
 	if Input.is_key_pressed(KEY_L):
 		Engine.time_scale = 0.05
 	else:
